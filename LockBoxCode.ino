@@ -1,28 +1,33 @@
-#include <ArduinoLowPower.h>
-#include <nano_gfx.h>
-#include <ssd1306.h>
-#include <Servo.h>
-#include <FlashStorage.h>
-#include <DS1302.h>
-#include <timestamp32bits.h>
-#include <RTClib.h>
+#include <ArduinoLowPower.h> //https://www.arduino.cc/en/Reference/ArduinoLowPower
+#include <nano_gfx.h> //https://github.com/lexus2k/ssd1306
+#include <ssd1306.h> //https://github.com/lexus2k/ssd1306
+#include <Servo.h> //https://www.arduino.cc/reference/en/libraries/servo/
+#include <FlashStorage.h> //https://github.com/cmaglie/FlashStorage
+#include <DS1302.h> //https://www.velleman.eu/support/downloads/?code=VMA301
+#include <timestamp32bits.h> //https://github.com/kosme/timestamp32bits
+#include <RTClib.h> //https://github.com/adafruit/RTClib
 
+//Pins for the buttons:
 #define UP_BUTTON_PIN 1
 #define RIGHT_BUTTON_PIN 2
 #define DOWN_BUTTON_PIN 3
 #define LEFT_BUTTON_PIN 6
 
-#define SERVO_PIN 7
-#define SERVO_TRANSISTOR_PIN 0
+//Pins for the servo:
+#define SERVO_PIN 7 //PWM pin for controlling the servo position
+#define SERVO_TRANSISTOR_PIN 0 //The pin for the transistor that enables/disables the servo
 
+//Pins for the RTC
 #define CLOCK_ENABLE_PIN 10  // Chip Enable
 #define CLOCK_IO_PIN  9  // Input/Output
 #define CLOCK_CLOCK_PIN 8  // Serial Clock
 
+
+//Internal constants:
 #define COMBO_LENGTH 6 //The current implementation supports combinations of up to 10 digits
 
 #define UNLOCKED_POSITION 180 //The servo angle for the unlocked position
-#define LOCKED_POSITION 100
+#define LOCKED_POSITION 100  //The servo angle for the locked position
 
 #define SERVO_WAIT_TIME 2000 //How long the servos are enabled before they are disabled again with the transistor
 #define SLEEP_TIMEOUT 10000 //How long the device stays awake since last input
@@ -35,8 +40,8 @@
 DS1302 rtc(CLOCK_ENABLE_PIN, CLOCK_IO_PIN, CLOCK_CLOCK_PIN);
 
 Servo servo;
-static unsigned long lastServoActuation = 0;
-static unsigned long lastTick = 0;
+static unsigned long lastServoActuation = 0; //The last time the servo was activated (for servo timeout)
+static unsigned long lastTick = 0; //The last time the current state's tick function was called
 
 void move_servo(const int servo_pos){
   lastServoActuation = millis();
@@ -58,7 +63,7 @@ void setup() {
   pinMode(LEFT_BUTTON_PIN, INPUT_PULLDOWN);
   pinMode(SERVO_TRANSISTOR_PIN, OUTPUT);
 
-  //Initialize the forward declarations (This is agonizing)
+  //Initialize the forward declarations from States.h
   UnlockedScreen = &__UnlockedScreen;
   SetCombo = &__SetCombo;
   LockedScreen = &__LockedScreen;

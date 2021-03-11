@@ -1,10 +1,12 @@
 #ifndef SCREEN_COMMANDS_H
 #define SCREEN_COMMANDS_H
 
+//Prints text to the center of the screen:
 void printCenter(const char* msg, uint8_t y_coord = 32){
   ssd1306_printFixed((128-ssd1306_getTextSize(msg, NULL))/2, y_coord, msg, STYLE_NORMAL);
 }
 
+//Prints text at the given coordinates
 void printRelative(const char* msg, float x_coord, float y_coord){
   lcduint_t* text_y_size;
   lcduint_t text_x_size = ssd1306_getTextSize(msg, text_y_size);

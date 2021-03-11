@@ -3,7 +3,7 @@
 
 static timestamp32bits stamp;
 
-String dayAsString(const Time::Day day) { //Taken from DS1302.h sample code
+String dayAsString(const Time::Day day) { //This function is taken from the DS1302.h sample code (see link in LockBoxCode.ino)
   switch (day) {
     case Time::kSunday: return "Sunday";
     case Time::kMonday: return "Monday";

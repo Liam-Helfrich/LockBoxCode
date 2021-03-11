@@ -17,12 +17,12 @@
 #define SET_DURATION_STATE_ID 4
 #define SLEEP_STATE_ID 5
 
-#define DEBOUNCE_TIME 100
+#define DEBOUNCE_TIME 100 //Button debounce
 
 static unsigned long lastPress = 0; //For interrupt debouncing
-static unsigned long pressTime = 0;
+static unsigned long pressTime = 0; //A variable for storing the time a button was pressed for comparison with lastPress
 
-//Store the states in the flash memory:
+//Reserve space for permanent stored data in Flash memory:
 FlashStorage(stored_state_id, uint8_t);
 FlashStorage(stored_combination, uint32_t);
 FlashStorage(locked_at_time, uint32_t);
@@ -60,22 +60,26 @@ bool hasElapsed(const unsigned long& startTime, int duration){ //This function a
 struct State{
   uint8_t state_id;
 
-  virtual void initialize() = 0;
-  virtual void finalize() = 0;
+  virtual void initialize() = 0; //Executes when the box transfers into this state
+  virtual void finalize() = 0; //Executes right before the box transfers out of this state
 
-  virtual void upButton() = 0;
+  virtual void upButton() = 0; //Executes when the up button is pressed
   virtual void downButton() = 0;
   virtual void leftButton() = 0;
   virtual void rightButton() = 0;
 
-  virtual void tick() = 0;
+  virtual void tick() = 0; //Executes once per second while this state is active
 };
 
 static State* curr_state = nullptr;
 static State* last_state = nullptr;
 
 
-//Forward declarations of mutually referenced states (I hate this):
+//Forward declarations of mutually referenced states:
+//NAMING CONVENTION:
+// No leading underscore = pointer to a state
+// One leading underscore = the name of a state
+// Two leading underscores = an instance of a state
 static State* UnlockedScreen = nullptr;
 static State* SetCombo = nullptr;
 static State* LockedScreen = nullptr;
@@ -83,6 +87,7 @@ static State* SetDuration = nullptr;
 static State* TimeLockedScreen = nullptr;
 static State* SleepState = nullptr;
 
+//Function to transfer out of the current state and into next_state:
 void transferTo(State* next_state){
   curr_state->finalize();
   if(curr_state != SleepState){
@@ -687,6 +692,7 @@ struct _SleepState: public State{
 
 #endif
 
+//A template for easily making new states in the future:
 /*
 struct _UnlockedScreen: public State{
   uint8_t state_id = 0;
