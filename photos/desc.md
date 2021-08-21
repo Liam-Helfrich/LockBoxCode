@@ -3,6 +3,8 @@ This is my electronic lockbox. It can be locked with a six-digit PIN or for a du
 
 ![ClosedBox](https://user-images.githubusercontent.com/78624384/130335036-70e5ead1-01f4-411a-b8d2-1a44e0405642.jpg)
 
+I designed the box to consume as little power as possible. The box runs on three AAA batteries and has a battery life of about one month in sleep mode. To conserve energy, the box can be switched off while it is locked: all state information is stored in non-volatile memory and the internal clock runs on a separate battery. This means that the box could theoretically last years on a single battery charge. 
+
 ## Using the Box
 
 Using the box is fairly simple. All input is handled through four push buttons on the lid of the box. A small OLED screen displays the user interface:
@@ -54,23 +56,6 @@ Once the box is locked, it cannot be opened until the set duration elapses. Beca
 Once the duration has elapsed, any button can be used to unlock the box:
 
 ![DurationElapsed](https://user-images.githubusercontent.com/78624384/130335033-2ad136a8-4e8c-43bf-bc7a-3cdf2c5090c4.jpg)
-
-
-
-
-
-## Hardware Design
-
-![Electronics](https://user-images.githubusercontent.com/78624384/130335014-18b24654-9e1d-4452-9a5e-bfba166d5159.jpg)
-
-## Software Design
-
-![SetCodeSelected](https://user-images.githubusercontent.com/78624384/130335020-a2a1fc08-120e-4073-b3c1-1ce83627e544.jpg)
-
-![CancelDuration](https://user-images.githubusercontent.com/78624384/130335029-305bcce7-a275-47a3-9a3e-57cfd631121d.jpg)
-![LockBarView](https://user-images.githubusercontent.com/78624384/130335034-6e1d0bf2-7da5-499a-82f4-35ea5f4eed74.jpg)
-
-
 
 
 
