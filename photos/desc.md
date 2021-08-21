@@ -15,6 +15,8 @@ To power the box on, flip the switch near the battery cover. The main menu will 
 
 The up and down buttons can be used to scroll through the menu. The right button will proceed to the next menu based on the current selection. The "Lock" option locks the box with the current PIN, the "Set code" option allows the user to change the PIN, and the "Time lock" option allows the user to lock the box for a set duration.
 
+Note that the box will enter sleep mode if no input is provided for ten consecutive seconds. Pressing the up button will wake the box from sleep mode.
+
 ### Setting the PIN
 
 The "Set code" menu is where the PIN can be set. The left and right buttons are used to select the digit to change, while the up and down buttons increase or decrease the value of the selected digit.
@@ -25,14 +27,26 @@ To confirm the new PIN, press the right button while the rightmost digit is sele
 
 ![ConfirmSetCode](https://user-images.githubusercontent.com/78624384/130335025-570d0831-2f9b-4d3d-9369-8a991d7d6f15.jpg)
 
-Pressing the right button once more will confirm the PIN selection.
+Pressing the right button once more will confirm the PIN selection. The confirmation can be canceled by pressing the left button. The menu can be exited altogether by pressing the left button while the leftmost digit is selected.
 
-### Lock with PIN
+### Lock/Unlock with PIN
 
-To lock the box, put on the lid and twist it as far clockwise as it will go. Selecting the "Lock" option in the main menu will lock the box shut. 
+To lock the box, put on the lid and twist it as far clockwise as it will go. Selecting the "Lock" option in the main menu will lock the box shut. A menu will appear to ask for the combination:
+
+INSERT COMBINATION PICTURE HERE
+
+### Lock for Duration
+
+Selecting the "Time lock" menu option opens a screen where the lock duration can be set. The controls work the same way as they do when setting the PIN.
 
 ![SettingDuration](https://user-images.githubusercontent.com/78624384/130335027-55a37b77-cbac-4e32-a3e8-c0f3890a7314.jpg)
-![CancelDuration](https://user-images.githubusercontent.com/78624384/130335029-305bcce7-a275-47a3-9a3e-57cfd631121d.jpg)
+
+The format for entering times is DD:HH:MM. In the above picture, the duration is set to 29 days, 23 hours, and 59 minutes. 
+
+The confirmation dialog will display the current time and date. If the time and date shown are not reasonable values, then the internal clock may be malfunctioning. If this occurs, replace the clock battery and set the correct time before using the timed lock feature.
+
+INSERT TIMED CONFIRMATION DIALOG
+
 ![WaitingForUnlock](https://user-images.githubusercontent.com/78624384/130335031-e44edff8-4b3a-4a72-b40a-da81d46a55dc.jpg)
 ![DurationElapsed](https://user-images.githubusercontent.com/78624384/130335033-2ad136a8-4e8c-43bf-bc7a-3cdf2c5090c4.jpg)
 ![LockBarView](https://user-images.githubusercontent.com/78624384/130335034-6e1d0bf2-7da5-499a-82f4-35ea5f4eed74.jpg)
@@ -47,6 +61,8 @@ To lock the box, put on the lid and twist it as far clockwise as it will go. Sel
 ## Software Design
 
 ![SetCodeSelected](https://user-images.githubusercontent.com/78624384/130335020-a2a1fc08-120e-4073-b3c1-1ce83627e544.jpg)
+
+![CancelDuration](https://user-images.githubusercontent.com/78624384/130335029-305bcce7-a275-47a3-9a3e-57cfd631121d.jpg)
 
 
 
