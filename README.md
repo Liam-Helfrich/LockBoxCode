@@ -1,3 +1,7 @@
+## Table of Contents
+
+[Software Design](#software-design)
+
 ## Overview
 This is my electronic lockbox. It can be locked with a six-digit PIN or for a duration of time up to thirty days. I created it from scratch, which involved designing the box in CAD, 3D-printing it, selecting and ordering the electronics, creating a schematic, wiring everything together, and writing the software to control it.
 
@@ -87,4 +91,4 @@ The code for the box is written in C++. It is divided into five files:
 
 [States.h](States.h) contains the majority of the box's logic. It handles the menu system, locking and unlocking, and storing state data to memory. It does this with an abstract class called "State". Each of State's subclasses represents a menu screen and the box's behavior when that screen is active. For instance, the class "UnlockedScreen" represents the main menu. It contains the logic to draw the menu onto the screen, and it defines what each button does while that menu is being displayed.
 
-A pointer keeps track of the current state by pointing to a State object. Whenever the box receives an input, the pointer is dereferenced to find the current state's function corresponding to the button pushed.
+A pointer keeps track of the current state by pointing to a State object. Whenever the box receives an input, the pointer is dereferenced to find the current state's function corresponding to the button pushed. This framework makes it easy to add new functions to the box without having to modify logic elsewhere in the code.
