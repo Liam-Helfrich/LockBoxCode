@@ -1,6 +1,13 @@
 ## Table of Contents
 
-[Software Design](#software-design)
+* [Overview](#overview)
+* [Using the Box](#using-the-box)
+   - [Setting the PIN](#setting-the-pin)
+   - [Lock/Unlock with PIN](#lock-and-unlock-with-pin)
+   - [Lock for Duration](#lock-for-duration)
+* [Hardware Design](#hardware-design)
+* [Software Design](#software-design)
+
 
 ## Overview
 This is my electronic lockbox. It can be locked with a six-digit PIN or for a duration of time up to thirty days. I created it from scratch, which involved designing the box in CAD, 3D-printing it, selecting and ordering the electronics, creating a schematic, wiring everything together, and writing the software to control it.
@@ -35,7 +42,7 @@ To confirm the new PIN, press the right button while the rightmost digit is sele
 
 Pressing the right button once more will confirm the PIN selection. The confirmation can be canceled by pressing the left button. The menu can be exited altogether by pressing the left button while the leftmost digit is selected.
 
-### Lock/Unlock with PIN
+### Lock and Unlock with PIN
 
 To lock the box, put on the lid and twist it as far clockwise as it will go. Selecting the "Lock" option in the main menu will lock the box shut. A menu will appear to ask for the combination:
 
