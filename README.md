@@ -39,13 +39,15 @@ To lock the box, put on the lid and twist it as far clockwise as it will go. Sel
 
 ### Lock for Duration
 
+Be sure to turn the lid as far clockwise as it will go before locking. 
+
 Selecting the "Time lock" menu option opens a screen where the lock duration can be set. The controls work the same way as they do when setting the PIN:
 
 ![SettingDuration](https://user-images.githubusercontent.com/78624384/130335027-55a37b77-cbac-4e32-a3e8-c0f3890a7314.jpg)
 
 The format for entering times is DD:HH:MM. In the above picture, the duration is set to 29 days, 23 hours, and 59 minutes. 
 
-The confirmation dialog will display the current time and date. If the time and date shown are not reasonable values, then the internal clock may be malfunctioning. If this occurs, replace the clock battery and set the correct time before using the timed lock feature.
+Once the duration is confirmed, the box will lock. The confirmation dialog will display the current time and date. If the time and date shown are not reasonable values, then the internal clock may be malfunctioning. If this occurs, replace the clock battery and set the correct time before using the timed lock feature.
 
 ![image](https://user-images.githubusercontent.com/78624384/130336511-4cf2949d-153d-4177-8b79-dfe0b78f0ffe.png)
 
@@ -71,7 +73,18 @@ The locking mechanism is a rack and pinion system. When the box is locked, the s
 
 ![ProtrudingPinion](https://user-images.githubusercontent.com/78624384/130338164-9254b43c-3460-47ff-8e51-d84cf69dfcba.png)
 
+## Software Design
 
+The code for the box is written in C++. It is divided into five files: 
 
+[LockBoxCode.ino](LockBoxCode.ino) initializes the box when it is turned on. It configures the inputs and outputs, reads the state data from memory, and navigates to the proper screen on startup. It also contains the main loop, which handles sleep mode, controls the servo transistors, and periodically executes functions relevant to the current state. 
 
+[ScreenCommands.h](ScreenCommands.h) contains functions for writing text to the screen.
 
+[Images.h](Images.h) contains bitmap data for the images used in the menu, namely the up and down arrows used when entering a PIN or time duration.
+
+[ClockCommands.h](ClockCommands.h) contains functions for manipulating time data. This includes converting times to strings, UNIX timestamps, and other objects for storing time data.
+
+[States.h](States.h) contains the majority of the box's logic. It handles the menu system, locking and unlocking, and storing state data to memory. It does this with an abstract class called "State". Each of State's subclasses represents a menu screen and the box's behavior when that screen is active. For instance, the class "UnlockedScreen" represents the main menu. It contains the logic to draw the menu onto the screen, and it defines what each button does while that menu is being displayed.
+
+A pointer keeps track of the current state by pointing to a State object. Whenever the box receives an input, the pointer is dereferenced to find the current state's function corresponding to the button pushed.
