@@ -58,5 +58,20 @@ Once the duration has elapsed, any button can be used to unlock the box:
 ![DurationElapsed](https://user-images.githubusercontent.com/78624384/130335033-2ad136a8-4e8c-43bf-bc7a-3cdf2c5090c4.jpg)
 
 
+## Hardware Design
+
+The electronics in the lid are shown below:
+
+![LabeledElectronicsII](https://user-images.githubusercontent.com/78624384/130338196-d95e3e80-d9b9-45c9-835d-82e32e04e476.jpg)
+
+
+The main board is a Seeeduino XIAO, which uses an ATSAMD21 microcontroller. It is quite small and consumes very little power in sleep mode. A DS1302 real-time clock is connected to the microcontroller via SPI. Its dedicated battery allows it to continue keeping time while the rest of the system is switched off. The OLED display, connected via I2C, is .96 inches in size and has a resolution of 128 x 64. It has its own sleep mode in which it consumes negligible power. The transistor assembly regulates power to the servo to prevent it from consuming power when not in use.
+
+The locking mechanism is a rack and pinion system. When the box is locked, the servo turns a pinion to move a rack into a slot. Once the rack is in place, the lid cannot be twisted until the rack is retracted. Below shows the rack in the locked position, protruding from the locking assembly:
+
+![ProtrudingPinion](https://user-images.githubusercontent.com/78624384/130338164-9254b43c-3460-47ff-8e51-d84cf69dfcba.png)
+
+
+
 
 
